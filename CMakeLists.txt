@@ -6,7 +6,9 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(motor-control main.cpp
-    motor.h motor.cpp)
+    motor.h motor.cpp
+    pidcontroller.h pidcontroller.cpp
+)
 
 include(GNUInstallDirs)
 install(TARGETS motor-control
