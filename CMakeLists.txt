@@ -5,10 +5,20 @@ project(motor-control LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(motor-control main.cpp
+find_package(Qt6 REQUIRED COMPONENTS Quick Test)
+qt_standard_project_setup(REQUIRES 6.10)
+
+qt_add_executable(motor-control main.cpp
     motor.h motor.cpp
     pidcontroller.h pidcontroller.cpp
 )
+
+qt_add_qml_module(motor-control
+    URI MotorControl
+    QML_FILES Main.qml
+)
+
+target_link_libraries(motor-control PRIVATE Qt6::Quick)
 
 include(GNUInstallDirs)
 install(TARGETS motor-control
@@ -16,7 +26,7 @@ install(TARGETS motor-control
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 # --- Unit tests ---
-find_package(Qt6 REQUIRED COMPONENTS Test)
+
 enable_testing()
 
 add_executable(tst_pidcontroller
