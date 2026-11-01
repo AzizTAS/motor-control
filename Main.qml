@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
 
 ApplicationWindow {
     width: 400
@@ -7,9 +8,30 @@ ApplicationWindow {
     visible: true
     title: "Motor Control"
 
-    Label {
+    ColumnLayout {
         anchors.centerIn: parent
-        text: "Speed: 0 rpm"
-        font.pixelSize: 24
+        spacing: 16
+
+        Label {
+            text: "Speed: 0 rpm"
+            font.pixelSize: 24
+        }
+
+        Label {
+            text: "Target: " + targetSlider.value.toFixed(0) + " rpm"
+        }
+
+        Slider {
+            id: targetSlider
+            from: 0
+            to: 3000
+            stepSize: 100
+            value: 1500
+            Layout.preferredWidth: 300
+        }
+
+        Button {
+            text: "Start"
+        }
     }
 }
