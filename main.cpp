@@ -1,21 +1,18 @@
-#include <iostream>
-#include "motor.h"
-#include "pidcontroller.h"
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
 
-int main()
+int main(int argc, char *argv[])
 {
-    std::cout << "Motor control demo" << std::endl;
+    QGuiApplication app(argc, argv);
 
-    Motor motor;
-    const double target=1500.0;
-    const double dt=0.1;
-    PidController pid(0.001, 0.002, 0.0);
+    QQmlApplicationEngine engine;
+    QObject::connect(
+        &engine,
+        &QQmlApplicationEngine::objectCreationFailed,
+        &app,
+        []() { QCoreApplication::exit(-1); },
+        Qt::QueuedConnection);
+    engine.loadFromModule("MotorControl", "Main");
 
-    for(int i=1; i<=50;i++){
-        double power = pid.compute(target, motor.speed(),dt);
-        motor.update(power,dt);
-        std::cout<<"Step "<<i<<": "<<motor.speed()<<" rpm"<<std::endl;
-    }
-
-    return 0;
+    return QGuiApplication::exec();
 }
