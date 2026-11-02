@@ -11,6 +11,7 @@ qt_standard_project_setup(REQUIRES 6.10)
 qt_add_executable(motor-control main.cpp
     motor.h motor.cpp
     pidcontroller.h pidcontroller.cpp
+    motorcontroller.h motorcontroller.cpp
 )
 
 qt_add_qml_module(motor-control

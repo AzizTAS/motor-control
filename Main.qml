@@ -8,12 +8,17 @@ ApplicationWindow {
     visible: true
     title: "Motor Control"
 
+
+    MotorController {
+        id: controller
+        target: targetSlider.value
+    }
     ColumnLayout {
         anchors.centerIn: parent
         spacing: 16
 
         Label {
-            text: "Speed: 0 rpm"
+            text: "Speed: " + controller.speed.toFixed(0) + " rpm"
             font.pixelSize: 24
         }
 
@@ -31,7 +36,8 @@ ApplicationWindow {
         }
 
         Button {
-            text: "Start"
+            text: controller.running ? "Stop" : "Start"
+            onClicked: controller.running ? controller.stop() : controller.start()
         }
     }
 }
