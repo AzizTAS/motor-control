@@ -15,33 +15,34 @@ private slots:
 
 void TestPidController::pOnlyOutput()
 {
-
-    PidController pid(0.001,0.0,0.0);
+    PidController pid(0.001, 0.0, 0.0);
 
     QCOMPARE(pid.compute(1500.0, 1000.0, 0.1), 0.5);
-    QCOMPARE(pid.compute(1500.0, 2000.0, 0.1), 0.0);
+}
 
-}void TestPidController::outputIsLimitedToOne(){
-    PidController pid(0.001,0.0,0.0);
+void TestPidController::outputIsLimitedToOne()
+{
+    PidController pid(0.001, 0.0, 0.0);
     QCOMPARE(pid.compute(1500.0, 0.0, 0.1), 1.0);
 }
-void TestPidController::outputNeverNegative(){
-    PidController pid(0.001,0.0,0.0);
+
+void TestPidController::outputNeverNegative()
+{
+    PidController pid(0.001, 0.0, 0.0);
     QCOMPARE(pid.compute(1500.0, 2000.0, 0.1), 0.0);
 }
 
-void TestPidController::reachesTarget(){
+void TestPidController::reachesTarget()
+{
     Motor motor;
-    const double target=1500.0;
-    const double dt=0.1;
-    PidController pid(0.001,0.002,0.0);
-    for(int i=1; i<=100;i++){
-        double power = pid.compute(target, motor.speed(),dt);
-        motor.update(power,dt);
-
-
+    const double target = 1500.0;
+    const double dt = 0.1;
+    PidController pid(0.001, 0.002, 0.0);
+    for (int i = 1; i <= 100; i++) {
+        double power = pid.compute(target, motor.speed(), dt);
+        motor.update(power, dt);
     }
-    QVERIFY(qAbs(motor.speed()-1500.0)<15.0);
+    QVERIFY(qAbs(motor.speed() - target) < 15.0);
 }
 
 QTEST_APPLESS_MAIN(TestPidController)

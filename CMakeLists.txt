@@ -26,6 +26,7 @@ install(TARGETS motor-control
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
+
 # --- Unit tests ---
 
 enable_testing()
