@@ -8,11 +8,11 @@ ApplicationWindow {
     visible: true
     title: "Motor Control"
 
-
     MotorController {
         id: controller
         target: targetSlider.value
     }
+
     ColumnLayout {
         anchors.centerIn: parent
         spacing: 16

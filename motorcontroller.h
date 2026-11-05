@@ -21,7 +21,6 @@ public:
     double target() const;
     void setTarget(double newTarget);
 
-
 public slots:
     void start();
     void stop();
@@ -31,15 +30,13 @@ signals:
     void runningChanged();
     void targetChanged();
 
-
 private:
     void step();
     Motor m_motor;
     PidController m_pid;
     QTimer m_timer;
-    double m_target=1500.0;
-    bool m_running=false;
+    double m_target = 1500.0;
+    bool m_running = false;
 };
-
 
 #endif // MOTORCONTROLLER_H

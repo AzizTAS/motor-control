@@ -9,10 +9,10 @@ public:
 
 private:
     double m_kp;
-    double  m_ki;
-    double  m_kd;
-    double m_integral=0.0;
-    double m_previousError=0.0;
+    double m_ki;
+    double m_kd;
+    double m_integral = 0.0;
+    double m_previousError = 0.0;
 };
 
 #endif // PIDCONTROLLER_H
